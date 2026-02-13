@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36915.13 d17.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Parcel_Delivery_System", "Parcel_Delivery_System\Parcel_Delivery_System.csproj", "{B6119400-85F4-437F-BEDB-F4571AE93E9D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B6119400-85F4-437F-BEDB-F4571AE93E9D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B6119400-85F4-437F-BEDB-F4571AE93E9D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B6119400-85F4-437F-BEDB-F4571AE93E9D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B6119400-85F4-437F-BEDB-F4571AE93E9D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {013B4C56-B587-41C4-A87D-942D02EB20E7}
+	EndGlobalSection
+EndGlobal
