@@ -1,0 +1,22 @@
+﻿@model List<Parcel_Delivery_System.Models.Parcel>
+
+<h2>All Parcels</h2>
+
+<table border="1">
+    <tr>
+        <th>Tracking</th>
+        <th>Sender</th>
+        <th>Receiver</th>
+        <th>Status</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.TrackingNumber</td>
+            <td>@item.SenderName</td>
+            <td>@item.ReceiverName</td>
+            <td>@item.Status</td>
+        </tr>
+    }
+</table>
