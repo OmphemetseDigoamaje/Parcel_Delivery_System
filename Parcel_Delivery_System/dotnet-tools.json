@@ -1,0 +1,10 @@
+{
+  "version": 1,
+  "isRoot": true,
+  "tools": {
+    "dotnet-aspnet-codegenerator": {
+      "version": "9.0.13",
+      "commands": [ "dotnet-aspnet-codegenerator" ]
+    }
+  }
+}

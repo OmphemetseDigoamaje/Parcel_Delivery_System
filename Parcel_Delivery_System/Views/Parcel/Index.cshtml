@@ -1,0 +1,25 @@
+﻿@model List<Parcel_Delivery_System.Models.Parcel>
+
+<h2>All Parcels</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Tracking Number</th>
+            <th>Sender</th>
+            <th>Receiver</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var parcel in Model)
+        {
+            <tr>
+                <td>@parcel.TrackingNumber ?? "Not Available"</td>
+                <td>@parcel.SenderName ?? "Not Available"</td>
+                <td>@parcel.ReceiverName ?? "Not Available"</td>
+                <td>@parcel.Status ?? "Not Available"</td>
+            </tr>
+        }
+    </tbody>
+</table>
