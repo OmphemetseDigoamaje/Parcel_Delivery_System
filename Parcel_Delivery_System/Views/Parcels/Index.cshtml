@@ -4,7 +4,23 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1 class="mb-4">Parcel Management</h1>
+
+<form asp-action="Index" method="get" class="mb-3">
+    <div class="input-group">
+        <input type="text" name="searchString" class="form-control"
+               placeholder="Search Tracking, Sender or Receiver..." />
+        <button type="submit" class="btn btn-primary">Search</button>
+        <a asp-action="Index" class="btn btn-secondary">Reset</a>
+    </div>
+</form>
+
+@if (!Model.Any())
+{
+    <div class="alert alert-danger">
+        No parcels found.
+    </div>
+}
 
 <p>
     <a asp-action="Create">Create New</a>
@@ -39,9 +55,11 @@
             <td>
                 @Html.DisplayFor(modelItem => item.ReceiverName)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Status)
-            </td>
+                <td>
+                    <span class="badge bg-warning">
+                        @item.Status
+                    </span>
+                </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.Id">Details</a> |

@@ -2,21 +2,24 @@
 
 <h2>All Parcels</h2>
 
-<table border="1">
-    <tr>
-        <th>Tracking</th>
-        <th>Sender</th>
-        <th>Receiver</th>
-        <th>Status</th>
-    </tr>
-
-    @foreach (var item in Model)
-    {
+<table class="table">
+    <thead>
         <tr>
-            <td>@item.TrackingNumber</td>
-            <td>@item.SenderName</td>
-            <td>@item.ReceiverName</td>
-            <td>@item.Status</td>
+            <th>Tracking Number</th>
+            <th>Sender</th>
+            <th>Receiver</th>
+            <th>Status</th>
         </tr>
-    }
+    </thead>
+    <tbody>
+        @foreach (var parcel in Model)
+        {
+            <tr>
+                <td>@parcel.TrackingNumber ?? "Not Available"</td>
+                <td>@parcel.SenderName ?? "Not Available"</td>
+                <td>@parcel.ReceiverName ?? "Not Available"</td>
+                <td>@parcel.Status ?? "Not Available"</td>
+            </tr>
+        }
+    </tbody>
 </table>

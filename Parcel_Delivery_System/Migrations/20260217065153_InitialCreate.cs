@@ -16,15 +16,21 @@ namespace Parcel_Delivery_System.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    TrackingNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    TrackingNumber = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     SenderName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ReceiverName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Status = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Status = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Parcels", x => x.Id);
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Parcels_TrackingNumber",
+                table: "Parcels",
+                column: "TrackingNumber",
+                unique: true);
         }
 
         /// <inheritdoc />

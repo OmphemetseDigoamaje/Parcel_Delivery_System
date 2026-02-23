@@ -4,14 +4,14 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using Parcel_Delivery_System.Models;
+using Parcel_Delivery_System.Data;
 
 #nullable disable
 
 namespace Parcel_Delivery_System.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20260213083914_InitialCreate")]
+    [Migration("20260217065153_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -41,13 +41,17 @@ namespace Parcel_Delivery_System.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Status")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("TrackingNumber")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("TrackingNumber")
+                        .IsUnique();
 
                     b.ToTable("Parcels");
                 });

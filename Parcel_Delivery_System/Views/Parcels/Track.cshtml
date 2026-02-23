@@ -1,0 +1,27 @@
+﻿@model Parcel_Delivery_System.Models.Parcel
+
+<h2>Track Your Parcel</h2>
+
+<form method="get">
+    <div class="input-group mb-3">
+        <input type="text" name="trackingNumber" class="form-control"
+               placeholder="Enter Tracking Number" />
+        <button type="submit" class="btn btn-primary">Track</button>
+    </div>
+</form>
+
+@if (Model != null)
+{
+    <div class="card p-3">
+        <h4>Tracking Number: @Model.TrackingNumber</h4>
+        <p><strong>Sender:</strong> @Model.SenderName</p>
+        <p><strong>Receiver:</strong> @Model.ReceiverName</p>
+        <p><strong>Status:</strong> @Model.Status</p>
+    </div>
+}
+else if (Context.Request.Query.ContainsKey("trackingNumber"))
+{
+    <div class="alert alert-danger">
+        Parcel not found.
+    </div>
+}

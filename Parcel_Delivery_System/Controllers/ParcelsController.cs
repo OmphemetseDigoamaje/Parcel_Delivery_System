@@ -1,39 +1,42 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Parcel_Delivery_System.Models;
+using Parcel_Delivery_System.Data; 
 
 namespace Parcel_Delivery_System.Controllers
 {
     public class ParcelsController : Controller
     {
-        private readonly ApplicationDbContext _context;
+		private readonly ApplicationDbContext _context;
 
-        public ParcelsController(ApplicationDbContext context)
-        {
-            _context = context;
-        }
+		public ParcelsController(ApplicationDbContext context)
+		{
+			_context = context;
+		}
 
-        // GET: Parcels
-        public async Task<IActionResult> Index()
-        {
-            return View(await _context.Parcels.ToListAsync());
-        }
 
-        // GET: Parcels/Details/5
-        public async Task<IActionResult> Details(int? id)
+		public async Task<IActionResult> Index(string searchString)
+		{
+			var parcels = from p in _context.Parcels
+						  select p;
+
+			if (!String.IsNullOrEmpty(searchString))
+			{
+				parcels = parcels.Where(p => p.TrackingNumber.Contains(searchString));
+			}
+
+			return View(await parcels.ToListAsync());
+		}
+
+
+		public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
-
-            var parcel = await _context.Parcels
-                .FirstOrDefaultAsync(m => m.Id == id);
+			var parcel = await _context.Parcels.FindAsync(id);
             if (parcel == null)
             {
                 return NotFound();
@@ -42,15 +45,13 @@ namespace Parcel_Delivery_System.Controllers
             return View(parcel);
         }
 
-        // GET: Parcels/Create
+        
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Parcels/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+       
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,TrackingNumber,SenderName,ReceiverName,Status")] Parcel parcel)
@@ -64,25 +65,22 @@ namespace Parcel_Delivery_System.Controllers
             return View(parcel);
         }
 
-        // GET: Parcels/Edit/5
+        
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
-
-            var parcel = await _context.Parcels.FindAsync(id);
-            if (parcel == null)
+			var parcel = await _context.Parcels.FindAsync(id);
+			if (parcel == null)
             {
                 return NotFound();
             }
             return View(parcel);
         }
 
-        // POST: Parcels/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+         
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,TrackingNumber,SenderName,ReceiverName,Status")] Parcel parcel)
@@ -133,7 +131,7 @@ namespace Parcel_Delivery_System.Controllers
             return View(parcel);
         }
 
-        // POST: Parcels/Delete/5
+        
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
@@ -152,5 +150,16 @@ namespace Parcel_Delivery_System.Controllers
         {
             return _context.Parcels.Any(e => e.Id == id);
         }
-    }
+
+		public IActionResult Track(string trackingNumber)
+		{
+			if (string.IsNullOrEmpty(trackingNumber))
+				return View(null);
+
+			var parcel = _context.Parcels
+								 .FirstOrDefault(p => p.TrackingNumber == trackingNumber);
+
+			return View(parcel); 
+		}
+	}
 }
