@@ -1,35 +1,39 @@
-﻿# Parcel Delivery System Architecture
+﻿```mermaid
+erDiagram
 
-## 1. Overview
-The system is a web-based application built using **ASP.NET Core MVC** and **Entity Framework Core**. Users interact with a front-end form to track parcels. Data is stored in a relational database.
+    PARCEL {
+        int Id PK
+        string TrackingNumber "Unique"
+        int SenderId FK
+        int ReceiverId FK
+        int StatusId FK
+        int TrackingId FK
+    }
 
-## 2. Components
+    SENDER {
+        int Id PK
+        string Name
+        string ContactInfo
+    }
 
-### 2.1 Model
-- **Parcel**
-  - `Id` (PK)
-  - `TrackingNumber` (Unique)
-  - `SenderName`
-  - `ReceiverName`
-  - `Status`
+    RECEIVER {
+        int Id PK
+        string Name
+        string ContactInfo
+    }
 
-### 2.2 Controller
-- Handles user requests:
-  - Tracking form submission
-  - Parcel management (CRUD operations)
+    STATUS {
+        int Id PK
+        string Description
+    }
 
-### 2.3 View
-- Displays parcel tracking form
-- Shows parcel information or "Parcel not found" alert
+    TRACKING {
+        int Id PK
+        string TrackingNumber
+        datetime CreatedAt
+    }
 
-### 2.4 Database
-- Stores parcels
-- Ensures `TrackingNumber` uniqueness
-
-## 3. ERD (Entity-Relationship Diagram)
-
-![ERD.png](architecture.png)
-
-The ERD highlights:
-- **Primary Key (PK)**: Id
-- **Unique Constraint**: TrackingNumber
+    PARCEL ||--|| SENDER : has
+    PARCEL ||--|| RECEIVER : has
+    PARCEL ||--|| STATUS : has
+    PARCEL ||--|| TRACKING : uses
