@@ -28,7 +28,7 @@ The system is a web-based application built using **ASP.NET Core MVC** and **Ent
 
 ## 3. ERD (Entity-Relationship Diagram)
 
-![Parcel Delivery System ERD](architecture.png)
+![ERD.png](architecture.png)
 
 The ERD highlights:
 - **Primary Key (PK)**: Id
