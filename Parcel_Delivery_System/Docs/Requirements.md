@@ -25,6 +25,6 @@ The Parcel Delivery System allows users to track parcels by their unique trackin
 
 ## 5. ERD Diagram
 
-![Parcel Delivery System ERD](architecture.png)
+![Parcel Delivery System ERD](Requirements.png)
 
 This diagram shows the Parcel entity with its fields and relationships.
